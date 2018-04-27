@@ -9,21 +9,19 @@ class Home extends CI_Controller {
         $this->load->model('get_data');
         $this->load->helper('url');
     }
-
-	public function index()
-	{
-	    //getting data from the model
-	    $data['sensors'] = $this->get_data->load_data();
-	    $values['min'] = $data['sensors']['min'];
+    public function index()
+    {
+        //getting data from the model
+        $data['sensors'] = $this->get_data->load_data();
+        $values['min'] = $data['sensors']['min'];
         $values['max'] = $data['sensors']['max'];
 
-	    //rendering views
+        //rendering views
         $this->load->view('header_view');
-		$this->load->view('home_view', $values);
+        $this->load->view('home_view', $values);
         $this->load->view('footer_view');
-	}
-
-	public function data()
+    }
+    public function data()
     {
         $startDate = $this->input->get('time_from', TRUE); //getting date for SQL query, and sanitizing it.
         $endDate = $this->input->get('time_to', TRUE); //getting date for SQL query, and sanitizing it.
@@ -43,9 +41,7 @@ class Home extends CI_Controller {
         {
             header("HTTP/1.1 406 Not Acceptable");
         }
-
     }
-
     public function add()
     {
     }
