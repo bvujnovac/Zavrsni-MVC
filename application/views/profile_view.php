@@ -59,8 +59,8 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <ul class="nav nav-pills nav-stacked">
-                            <li class="active"><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
-                            <li> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
+                            <li><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
+                            <li class="active"> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
                             <li><a href="<?php echo base_url(); ?>obavijesti">Obavijesti</a></li>
                             <li><a href="<?php echo base_url(); ?>odjava">Odjava</a></li>
                         </ul>
