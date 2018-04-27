@@ -22,7 +22,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 .idea/*
 composer.lock
 vendor
-.remote-sync.json
 
 ## Sublime Text cache files
 *.tmlanguage.cache
