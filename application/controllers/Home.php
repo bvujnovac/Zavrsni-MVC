@@ -44,5 +44,18 @@ class Home extends CI_Controller {
     }
     public function add()
     {
+      $temperature = $this->input->get('temperature', TRUE); //getting temperature for SQL query, and sanitizing it.
+      $light = $this->input->get('light', TRUE); //getting light for SQL query, and sanitizing it.
+      $moist = $this->input->get('moist', TRUE); //getting moist for SQL query, and sanitizing it.
+      $phvalue = $this->input->get('phvalue', TRUE); //getting phvalue for SQL query, and sanitizing it.
+
+      if ($temperature && $light && $moist && $phvalue) {
+        $addData = array('temperature' => $temperature,'light' => $light,'moist' => $moist,'phvalue' => $phvalue);
+
+        $this->db->insert('datalog', $addData);
+      }
+      else {
+        header("HTTP/1.1 406 Not Acceptable");
+      }
     }
 }
