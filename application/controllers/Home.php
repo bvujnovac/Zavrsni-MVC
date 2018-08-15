@@ -54,6 +54,7 @@ class Home extends CI_Controller {
       $this->get_data->add_data($id, $temperature, $light, $moist, $phvalue);
     }
     else {
+      //else
       header("HTTP/1.1 406 Not Acceptable");
     }
   }

@@ -101,11 +101,11 @@ class Get_data extends CI_Model {
 
   public function add_data($id, $temperature, $light, $moist, $phvalue)
   {
-    $id = $id
-    $temperature = $temperature
-    $light = $light
-    $moist = $moist
-    $phvalue = $phvalue
+    $id = $id;
+    $temperature = $temperature;
+    $light = $light;
+    $moist = $moist;
+    $phvalue = $phvalue;
 
     if ($this->db->table_exists($id))
     {
@@ -113,7 +113,7 @@ class Get_data extends CI_Model {
       $this->db->insert($id, $addData);
     }
     else {
-      // table does not exist
+      // table does not exist.
     }
 
   }
