@@ -127,16 +127,56 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="well"  id="sessions">
-                        <h4>Temperatura</h4>
-                        <p><span id="temperature-chart-container">Ovdje će se crtat grafovi</span></p>
+                        <h4>Postojeći profili</h4>
+                        <?php echo $tables; ?>
+                        <p><span id="dtemperature-chart-container"> </span></p>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-sm-12">
                     <div class="well"  id="sessions">
-                        <h4>Osvjetljenje</h4>
-                        <p><span id="light-chart-container">Ovdje će se crtat grafovi</span></p>
+                        <h4>Dodaj novi profil</h4>
+                        <form action="/profili/add" method="get">
+                          <div class="form-group">
+                            <div class="col">
+                              <label for="profilename">Ime profila</label>
+                              <input type="text" class="form-control" name="profilename" id="profilename" placeholder="Ime profila, jedna riječ.">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col">
+                              <label for="temperatureopt">Temperatura</label>
+                              <input type="number" class="form-control" name="temperatureopt" id="temperatureopt" placeholder="Optimum za razvoj biljke">
+                            </div>
+                            <div class="col">
+                              <input type="number" class="form-control" name="temperaturemax" id="temperaturemax" placeholder="Maximum">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col">
+                              <label for="lighthours">Osvjetljenje</label>
+                              <input type="number" class="form-control" name="lighthours" id="lighthours" placeholder="Broj sati dnevnog svijetla potrebnog biljci">
+                            </div>
+                          </div>
+                          <div class="form-group">
+                            <div class="col">
+                              <label for="moisture">Vlaga tla</label>
+                              <input type="number" class="form-control" name="moisture" id="moisture" placeholder="Optimalna vlaga tla izražena u postotku.">
+                            </div>
+                          </div
+                          <div class="form-group">
+                            <div class="col">
+                              <label for="phvaluemin">Ph vrijednost</label>
+                              <input type="number" class="form-control" name="phvaluemin" id="phvaluemin" placeholder="Minimum">
+                            </div>
+                            <div class="col">
+                              <input type="number" class="form-control" name="phvaluemax" id="phvaluemax" placeholder="Maximum">
+                            </div>
+                          </div>
+                          <button type="submit" class="btn btn-primary">Spremi</button>
+                        </form>
+                        <p><span>Nakon spremanja dodati će se novi profil.</span></p>
                     </div>
                 </div>
             </div>
