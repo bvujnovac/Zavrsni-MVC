@@ -81,8 +81,13 @@
                     <h1>Sustav nadzora i ocjene kakvoće tla i uvjeta za uzgoj bilja</h1>
 
                 </div>
+
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
                     <div class="row">
+                      <select class="form-control">
+                        <option>mrkva</option>
+                        <option>rajčica</option>
+                      </select>
                         <div class='col-sm-12 form-inline datetimepickerwrapper'>
                             <div class="form-group">
                                 <label>Od</label>
@@ -130,15 +135,40 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="well">
                         <div class="row">
-                            <div class="col-md-12 col-lg-6">
 
-                                <h5>Trenutna temperatura</h5>
-                                <h3>23</h3>
+                          <div id="temp-container"></div>
+                          <script>
 
-                            </div>
-                            <div class="col-md-12 col-lg-6">
-                                <span id="temperature-realtime-chart-container">Ovdje će se crtat grafovi</span>
-                            </div>
+                          const tempSource = {
+                            "chart": {
+                              "caption": "Temperatura zraka",
+                              "subcaption": "(Trenutna)",
+                              "lowerlimit": "0",
+                              "upperlimit": "40",
+                              "numbersuffix": "°C",
+                              "thmfillcolor": "#008ee4",
+                              "showgaugeborder": "1",
+                              "gaugebordercolor": "#008ee4",
+                              "gaugeborderthickness": "2",
+                              "plottooltext": "Temperature: <b>$datavalue</b> ",
+                              "theme": "zune",
+                              "showvalue": "1"
+                            },
+                            "value": "<?php echo $temp ?>"
+                          };
+
+                          FusionCharts.ready(function() {
+                            var myChart = new FusionCharts({
+                              type: "thermometer",
+                              renderAt: "temp-container",
+                              width: "100%",
+                              height: "200%",
+                              dataFormat: "json",
+                              dataSource: tempSource
+                            }).render();
+                          });
+                          </script>
+
                         </div>
                     </div>
 
@@ -146,15 +176,56 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="well">
                         <div class="row">
-                            <div class="col-md-12 col-lg-6">
+                          <div id="light-container"></div>
+                          <script>
+                          FusionCharts.ready(function() {
+                            var myChart = new FusionCharts({
+                              type: "angulargauge",
+                              renderAt: "light-container",
+                              width: "100%",
+                              height: "200%",
+                              dataFormat: "json",
+                              dataSource: {
+                                chart: {
+                                  caption: "Trenutno osvjetljenje(%)",
+                                  lowerlimit: "0",
+                                  upperlimit: "100",
+                                  showvalue: "1",
+                                  numbersuffix: "%",
+                                  theme: "zune",
+                                  showtooltip: "0"
+                                },
+                                colorrange: {
+                                  color: [
+                                    {
+                                      minvalue: "0",
+                                      maxvalue: "50",
+                                      code: "#F2726F"
+                                    },
+                                    {
+                                      minvalue: "50",
+                                      maxvalue: "75",
+                                      code: "#FFC533"
+                                    },
+                                    {
+                                      minvalue: "75",
+                                      maxvalue: "100",
+                                      code: "#62B58F"
+                                    }
+                                  ]
+                                },
+                                dials: {
+                                  dial: [
+                                    {
+                                      value: "<?php echo $light ?>"
+                                    }
+                                  ]
+                                }
+                              }
+                            }).render();
+                          });
+                          </script>
 
-                                <h5>Trenutno osvjetljenje</h5>
-                                <h3>70%</h3>
-                            </div>
-
-                            <div class="col-md-12 col-lg-6">
-                                <span id="light-realtime-chart-container">Ovdje će se crtat grafovi</span>
-                            </div>
                         </div>
 
                     </div>
@@ -162,37 +233,108 @@
                 <div class="col-sm-6 col-md-6 col-lg-3">
                     <div class="well">
                         <div class="row">
-                            <div class="col-md-12 col-lg-6">
+                          <div id="moist-container"></div>
+                          <script>
+                          FusionCharts.ready(function() {
+                            var myChart = new FusionCharts({
+                              type: "cylinder",
+                              renderAt: "moist-container",
+                              width: "100%",
+                              height: "200%",
+                              dataFormat: "json",
+                              dataSource: {
+                                chart: {
+                                  caption: "Vlaga tla (%)",
+                                  lowerlimit: "0",
+                                  upperlimit: "50",
+                                  lowerlimitdisplay: "Niska",
+                                  upperlimitdisplay: "Visoka",
+                                  numbersuffix: " %",
+                                  cylfillcolor: "#5D62B5",
+                                  plottooltext: "Trenutna vlaga: <b>15 %</b>",
+                                  cylfillhoveralpha: "85",
+                                  theme: "zune"
+                                },
+                                value: "<?php echo $moist ?>"
+                              }
+                            }).render();
+                          });
 
-                                <h5>Trenutna vlaga   </h5>
-                                <h3>15%</h3>
-                            </div>
+                          </script>
 
-                            <div class="col-md-12 col-lg-6">
-                                <span id="moist-realtime-chart-container">Ovdje će se crtat grafovi</span>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-sm-6 col-md-6 col-lg-3">
-
-
                     <div class="well">
                         <div class="row">
-                            <div class="col-md-12 col-lg-6">
+                          <div id="ph-container"></div>
+                          <script>
+                          const phSource = {
+                            "chart": {
+                              "caption": "Ph vrijednost tla",
+                              "theme": "zune",
+                              "showvalue": "1",
+                              "pointerbghovercolor": "#ffffff",
+                              "pointerbghoveralpha": "80",
+                              "pointerhoverradius": "12",
+                              "showborderonhover": "1",
+                              "pointerborderhovercolor": "#333333",
+                              "pointerborderhoverthickness": "2",
+                              "showtickmarks": "0",
+                              "numbersuffix": " "
+                            },
+                            "colorrange": {
+                              "color": [
+                                {
+                                  "minvalue": "2",
+                                  "maxvalue": "3",
+                                  "label": "nagrizajuće kiselo",
+                                  "code": "#e44a00"
+                                },
+                                {
+                                  "minvalue": "4",
+                                  "maxvalue": "5",
+                                  "label": "kiselo",
+                                  "code": "#f8bd19"
+                                },
+                                {
+                                  "minvalue": "6",
+                                  "maxvalue": "7",
+                                  "label": "neutralno",
+                                  "code": "#6baa01"
+                                }
+                              ]
+                            },
+                            "pointers": {
+                              "pointer": [
+                                {
+                                  "value": "<?php echo $phvalue ?>",
+                                  "tooltext": "Ph vrijednost tla  "
+                                }
+                              ]
+                            }
+                          };
 
-                                <h5>Ph faktor   </h5>
-                                <h3>neutralno</h3>
-                            </div>
+                          FusionCharts.ready(function() {
+                            var myChart = new FusionCharts({
+                              type: "hlineargauge",
+                              renderAt: "ph-container",
+                              width: "100%",
+                              height: "200%",
+                              dataFormat: "json",
+                              dataSource: phSource
+                            }).render();
+                          });
+                          </script>
 
-                            <div class="col-md-12 col-lg-6">
-                                <span id="bounce-rate-chart-container">Ovdje će se crtat grafovi</span>
-                            </div>
                         </div>
 
                     </div>
                 </div>
             </div>
+
+
             <div class="row">
                 <div class="col-sm-12">
                     <div class="well"  id="sessions">

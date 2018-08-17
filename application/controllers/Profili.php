@@ -23,7 +23,7 @@ class Profili extends CI_Controller {
         $profiles = $this->profile_data->existing_profiles();
 
         $template = array(
-          'table_open'            => '<table border="0" cellpadding="4" cellspacing="0">',
+          'table_open'            => '<table class="table table-condensed">',
 
           'thead_open'            => '<thead>',
           'thead_close'           => '</thead>',
@@ -49,7 +49,8 @@ class Profili extends CI_Controller {
           'table_close'           => '</table>'
         );
 
-        //$values['tables'] = $this->table->set_template($template);
+        $values['tables'] = $this->table->set_heading('Profil', 'Temperaturni opt.', 'Temperaturni maks.', 'Osvjetljenje (h)', 'Vlaga', 'Ph min.', 'Ph maks.');
+        $values['tables'] = $this->table->set_template($template);
         $values['tables'] = $this->table->generate($profiles);
 
         $this->load->view('header_view');

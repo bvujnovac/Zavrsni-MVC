@@ -27,8 +27,8 @@
         </div>
         <div class="collapse navbar-collapse" id="myNavbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
-                <li> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
+                <li><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
+                <li class="active"> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
                 <li><a href="<?php echo base_url(); ?>obavijesti">Obavijesti</a></li>
                 <li><a href="<?php echo base_url(); ?>logout">Odjava</a></li>
             </ul>
@@ -127,9 +127,11 @@
             <div class="row">
                 <div class="col-sm-12">
                     <div class="well"  id="sessions">
+                      <div class="table-responsive">
                         <h4>Postojeći profili</h4>
                         <?php echo $tables; ?>
-                        <p><span id="dtemperature-chart-container"> </span></p>
+                        <p><span> </span></p>
+                        </div>
                     </div>
                 </div>
             </div>

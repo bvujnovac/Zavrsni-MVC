@@ -11,10 +11,15 @@ class Home extends CI_Controller {
   }
   public function index()
   {
-    //getting data from the model
+    //getting min/max timestamp data from the model
     $data['sensors'] = $this->get_data->load_data();
     $values['min'] = $data['sensors']['min'];
     $values['max'] = $data['sensors']['max'];
+    //sensor values
+    $values['temp'] = $data['sensors']['temp'];
+    $values['light'] = $data['sensors']['light'];
+    $values['moist'] = $data['sensors']['moist'];
+    $values['phvalue'] = $data['sensors']['phvalue'];
 
     //rendering views
     $this->load->view('header_view');

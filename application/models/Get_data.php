@@ -15,25 +15,57 @@ class Get_data extends CI_Model {
   //method to retrieve data from database and format it.
   public function load_data()
   {
-    $sql1 = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d') AS `timeMin` FROM `datalog` WHERE timeStamp=(select min(timeStamp) from datalog)";
-    $sql2 = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d') AS `timeMax` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
+    $sqlmintime = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d') AS `timeMin` FROM `datalog` WHERE timeStamp=(select min(timeStamp) from datalog)";
+    $sqlmaxtime = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d') AS `timeMax` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
+    $sqllasttemp = "SELECT `temperature` AS `temp` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
+    $sqllastlight = "SELECT `light` AS `light` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
+    $sqllastmoist = "SELECT `moist` AS `moist` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
+    $sqllastphvalue = "SELECT `phvalue` AS `phvalue` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
 
     $minmaxArray = array();
 
-    $query1 = $this->db->query($sql1);
-    $query2 = $this->db->query($sql2);
+    $querysqlmintime = $this->db->query($sqlmintime);
+    $querysqlmaxtime = $this->db->query($sqlmaxtime);
 
-    foreach ($query1->result() as $row)
+    $querysqllasttemp = $this->db->query($sqllasttemp);
+    $querysqllastlight = $this->db->query($sqllastlight);
+    $querysqllastmoist = $this->db->query($sqllastmoist);
+    $querysqllastphvalue = $this->db->query($sqllastphvalue);
+
+
+
+    foreach ($querysqlmintime->result() as $row)
     {
       $min = $row->timeMin;
 
     }
 
-    foreach ($query2->result() as $row)
+    foreach ($querysqlmaxtime->result() as $row)
     {
       $max = $row->timeMax;
 
     }
+/// sensors values
+foreach ($querysqllasttemp->result() as $row)
+{
+  $temp = $row->temp;
+
+}
+foreach ($querysqllastlight->result() as $row)
+{
+  $light = $row->light;
+
+}
+foreach ($querysqllastmoist->result() as $row)
+{
+  $moist = $row->moist;
+
+}
+foreach ($querysqllastphvalue->result() as $row)
+{
+  $phvalue = $row->phvalue;
+
+}
 
     function array_push_assoc($array, $key, $value){
       $array[$key] = $value;
@@ -42,6 +74,11 @@ class Get_data extends CI_Model {
 
     $minmaxArray = array_push_assoc($minmaxArray,'min', $min);
     $minmaxArray = array_push_assoc($minmaxArray,'max', $max);
+// sensor value
+    $minmaxArray = array_push_assoc($minmaxArray,'temp', $temp);
+    $minmaxArray = array_push_assoc($minmaxArray,'light', $light);
+    $minmaxArray = array_push_assoc($minmaxArray,'moist', $moist);
+    $minmaxArray = array_push_assoc($minmaxArray,'phvalue', $phvalue);
 
     return $minmaxArray;
   }
