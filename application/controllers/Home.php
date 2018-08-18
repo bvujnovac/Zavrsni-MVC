@@ -7,6 +7,7 @@ class Home extends CI_Controller {
   {
     parent::__construct();
     $this->load->model('get_data');
+    $this->load->model('profile_data');
     $this->load->helper('url');
   }
   public function index()
@@ -20,6 +21,20 @@ class Home extends CI_Controller {
     $values['light'] = $data['sensors']['light'];
     $values['moist'] = $data['sensors']['moist'];
     $values['phvalue'] = $data['sensors']['phvalue'];
+
+    $profile = $this->profile_data->get_profile_id();
+    $values['id'] = $profile['not_default'];
+    $values['id_default'] = $profile['default'];
+
+    $profileselect = $this->input->post('profileselect', TRUE);
+
+    if ($profileselect)
+    {
+      $profile = $this->profile_data->set_profile_id($profileselect);
+      //$values['id'] = $profile['not_default'];
+      //$values['id_default'] = $profile['default'];
+      header('Location: /home');
+    }
 
     //rendering views
     $this->load->view('header_view');

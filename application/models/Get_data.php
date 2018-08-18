@@ -15,72 +15,86 @@ class Get_data extends CI_Model {
   //method to retrieve data from database and format it.
   public function load_data()
   {
-    $sqlmintime = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d') AS `timeMin` FROM `datalog` WHERE timeStamp=(select min(timeStamp) from datalog)";
-    $sqlmaxtime = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d') AS `timeMax` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
-    $sqllasttemp = "SELECT `temperature` AS `temp` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
-    $sqllastlight = "SELECT `light` AS `light` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
-    $sqllastmoist = "SELECT `moist` AS `moist` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
-    $sqllastphvalue = "SELECT `phvalue` AS `phvalue` FROM `datalog` WHERE timeStamp=(select max(timeStamp) from datalog)";
-
-    $minmaxArray = array();
-
-    $querysqlmintime = $this->db->query($sqlmintime);
-    $querysqlmaxtime = $this->db->query($sqlmaxtime);
-
-    $querysqllasttemp = $this->db->query($sqllasttemp);
-    $querysqllastlight = $this->db->query($sqllastlight);
-    $querysqllastmoist = $this->db->query($sqllastmoist);
-    $querysqllastphvalue = $this->db->query($sqllastphvalue);
-
-
-
-    foreach ($querysqlmintime->result() as $row)
-    {
-      $min = $row->timeMin;
-
-    }
-
-    foreach ($querysqlmaxtime->result() as $row)
-    {
-      $max = $row->timeMax;
-
-    }
-/// sensors values
-foreach ($querysqllasttemp->result() as $row)
-{
-  $temp = $row->temp;
-
-}
-foreach ($querysqllastlight->result() as $row)
-{
-  $light = $row->light;
-
-}
-foreach ($querysqllastmoist->result() as $row)
-{
-  $moist = $row->moist;
-
-}
-foreach ($querysqllastphvalue->result() as $row)
-{
-  $phvalue = $row->phvalue;
-
-}
+    $query_getdefault = $this->db->select('id');
+    $query_getdefault = $this->db->where('is_default', '1');
+    $query_getdefault = $this->db->get('profiles');
+    $row = $query_getdefault->row();
+    $default_id = $row->id;
 
     function array_push_assoc($array, $key, $value){
       $array[$key] = $value;
       return $array;
     }
 
-    $minmaxArray = array_push_assoc($minmaxArray,'min', $min);
-    $minmaxArray = array_push_assoc($minmaxArray,'max', $max);
-// sensor value
-    $minmaxArray = array_push_assoc($minmaxArray,'temp', $temp);
-    $minmaxArray = array_push_assoc($minmaxArray,'light', $light);
-    $minmaxArray = array_push_assoc($minmaxArray,'moist', $moist);
-    $minmaxArray = array_push_assoc($minmaxArray,'phvalue', $phvalue);
+    $querycheck = $this->db->get($default_id);
 
-    return $minmaxArray;
+    if($querycheck->num_rows() > 0) {
+
+      $sqlmintime = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d') AS `timeMin` FROM `{$default_id}` WHERE timeStamp=(select min(timeStamp) from `{$default_id}`)";
+      $sqlmaxtime = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d') AS `timeMax` FROM `{$default_id}` WHERE timeStamp=(select max(timeStamp) from `{$default_id}`)";
+      $sqllasttemp = "SELECT `temperature` AS `temp` FROM `{$default_id}` WHERE timeStamp=(select max(timeStamp) from `{$default_id}`)";
+      $sqllastlight = "SELECT `light` AS `light` FROM `{$default_id}` WHERE timeStamp=(select max(timeStamp) from `{$default_id}`)";
+      $sqllastmoist = "SELECT `moist` AS `moist` FROM `{$default_id}` WHERE timeStamp=(select max(timeStamp) from `{$default_id}`)";
+      $sqllastphvalue = "SELECT `phvalue` AS `phvalue` FROM `{$default_id}` WHERE timeStamp=(select max(timeStamp) from `{$default_id}`)";
+
+      $minmaxArray = array();
+
+      $querysqlmintime = $this->db->query($sqlmintime);
+      $querysqlmaxtime = $this->db->query($sqlmaxtime);
+      //sensors query
+      $querysqllasttemp = $this->db->query($sqllasttemp);
+      $querysqllastlight = $this->db->query($sqllastlight);
+      $querysqllastmoist = $this->db->query($sqllastmoist);
+      $querysqllastphvalue = $this->db->query($sqllastphvalue);
+
+
+      foreach ($querysqlmintime->result() as $row)
+      {
+        $min = $row->timeMin;
+
+      }
+
+      foreach ($querysqlmaxtime->result() as $row)
+      {
+        $max = $row->timeMax;
+
+      }
+      /// sensors values
+      foreach ($querysqllasttemp->result() as $row)
+      {
+        $temp = $row->temp;
+
+      }
+      foreach ($querysqllastlight->result() as $row)
+      {
+        $light = $row->light;
+
+      }
+      foreach ($querysqllastmoist->result() as $row)
+      {
+        $moist = $row->moist;
+
+      }
+      foreach ($querysqllastphvalue->result() as $row)
+      {
+        $phvalue = $row->phvalue;
+
+      }
+
+      $minmaxArray = array_push_assoc($minmaxArray,'min', $min);
+      $minmaxArray = array_push_assoc($minmaxArray,'max', $max);
+  // sensor value
+      $minmaxArray = array_push_assoc($minmaxArray,'temp', $temp);
+      $minmaxArray = array_push_assoc($minmaxArray,'light', $light);
+      $minmaxArray = array_push_assoc($minmaxArray,'moist', $moist);
+      $minmaxArray = array_push_assoc($minmaxArray,'phvalue', $phvalue);
+
+      return $minmaxArray;
+
+    }
+    else{
+        //echo "empty table" . " " . $default_id;
+        }
   }
 
 
@@ -90,7 +104,13 @@ foreach ($querysqllastphvalue->result() as $row)
     $startDate = $start; //fixed data for now
     $endDate = $end; //fixed date for now.
 
-    $sql = "SELECT `timeStamp` AS `time`, `temperature`, `light`, `moist`, `phvalue` FROM `datalog` WHERE `timeStamp` BETWEEN '{$startDate}' AND '{$endDate}' ORDER BY `timeStamp` ASC";
+    $query_getdefault = $this->db->select('id');
+    $query_getdefault = $this->db->where('is_default', '1');
+    $query_getdefault = $this->db->get('profiles');
+    $row = $query_getdefault->row();
+    $default_id = $row->id;
+
+    $sql = "SELECT `timeStamp` AS `time`, `temperature`, `light`, `moist`, `phvalue` FROM `{$default_id}` WHERE `timeStamp` BETWEEN '{$startDate}' AND '{$endDate}' ORDER BY `timeStamp` ASC";
 
     //$query= $this->db->get('datalog');
 
@@ -122,7 +142,7 @@ foreach ($querysqllastphvalue->result() as $row)
       array_push($jsonArrayMoist, $jsonArrayItemMoist);
       array_push($jsonArrayPhvalue, $jsonArrayItemPhvalue);
     }
-    //function to create
+    //function to push array into an associative array
     function array_push_assoc($array, $key, $value){
       $array[$key] = $value;
       return $array;

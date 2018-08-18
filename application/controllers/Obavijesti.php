@@ -1,11 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: beni
- * Date: 11.04.18.
- * Time: 12:35
- */
-class Profili extends CI_Controller {
+
+class Obavijesti extends CI_Controller {
     public function __construct()
     {
         parent::__construct();
@@ -65,30 +60,8 @@ class Profili extends CI_Controller {
         }
 
         $this->load->view('header_view');
-        $this->load->view('profile_view', $values);
+        $this->load->view('obavijesti_view', $values);
         $this->load->view('footer_view');
     }
 
-    public function add()
-    {
-      #$str = strtolower($str);
-      $id = strtolower($this->input->get('profilename', TRUE)); //getting temperature for SQL query, and sanitizing it.
-      $temperatureopt = strtolower($this->input->get('temperatureopt', TRUE)); //getting temperature for SQL query, and sanitizing it.
-      $temperaturemax = strtolower($this->input->get('temperaturemax', TRUE)); //getting temperature for SQL query, and sanitizing it.
-      $lighthours = strtolower($this->input->get('lighthours', TRUE)); //getting light for SQL query, and sanitizing it.
-      $moisture = strtolower($this->input->get('moisture', TRUE)); //getting moist for SQL query, and sanitizing it.
-      $phvaluemin = strtolower($this->input->get('phvaluemin', TRUE)); //getting phvalue for SQL query, and sanitizing it.
-      $phvaluemax = strtolower($this->input->get('phvaluemax', TRUE)); //getting phvalue for SQL query, and sanitizing it.
-
-      if ($id && $temperatureopt && $temperaturemax && $lighthours && $moisture && $phvaluemin && $phvaluemax) {
-        $this->profile_data->new_profile($id, $temperatureopt, $temperaturemax, $lighthours, $moisture, $phvaluemin, $phvaluemax);
-      }
-      else {
-        header("HTTP/1.1 406 Not Acceptable");
-      }
-    }
-    public function update()
-    {
-
-    }
 }

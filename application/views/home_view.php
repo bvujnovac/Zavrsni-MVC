@@ -81,13 +81,23 @@
                     <h1>Sustav nadzora i ocjene kakvoće tla i uvjeta za uzgoj bilja</h1>
 
                 </div>
-
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                  <h5>Odabir profila za prikaz</h5>
+                  <form action="/home" method="POST">
+                      <select class="form-control" name="profileselect" id="profileselect" onchange="this.form.submit()">
+                          <!--<option value="mrkva">mrkva</option>-->
+                          <?php if(isset($id) && isset($id_default)){
+                            $nmbrof = count($id);
+                            echo '<option' . " " . 'value=' . "$id_default[0]" . '>' . $id_default[0] . '</option>';
+                            for ($i=0; $i < $nmbrof; $i++) {
+                              echo '<option' . " " . 'value=' . "$id[$i]" . '>' . $id[$i] . '</option>';
+                            }
+                          } ?>
+                      </select>
+                  </form>
+                </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
                     <div class="row">
-                      <select class="form-control">
-                        <option>mrkva</option>
-                        <option>rajčica</option>
-                      </select>
                         <div class='col-sm-12 form-inline datetimepickerwrapper'>
                             <div class="form-group">
                                 <label>Od</label>
