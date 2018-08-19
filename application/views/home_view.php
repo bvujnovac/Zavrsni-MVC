@@ -261,7 +261,7 @@
                                   upperlimitdisplay: "Visoka",
                                   numbersuffix: " %",
                                   cylfillcolor: "#5D62B5",
-                                  plottooltext: "Trenutna vlaga: <b>15 %</b>",
+                                  plottooltext: "Trenutna vlaga: <b><?php echo $moist ?>%</b>",
                                   cylfillhoveralpha: "85",
                                   theme: "zune"
                                 },
