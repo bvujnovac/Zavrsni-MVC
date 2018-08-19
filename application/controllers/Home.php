@@ -12,7 +12,7 @@ class Home extends CI_Controller {
   }
   public function index()
   {
-    //getting min/max timestamp data from the model
+    //getting min/max timestamp and last sensor values data from the model
     $data['sensors'] = $this->get_data->load_data();
     $values['min'] = $data['sensors']['min'];
     $values['max'] = $data['sensors']['max'];
@@ -21,26 +21,25 @@ class Home extends CI_Controller {
     $values['light'] = $data['sensors']['light'];
     $values['moist'] = $data['sensors']['moist'];
     $values['phvalue'] = $data['sensors']['phvalue'];
-
+    //grab the default and non-defalut profile id's
     $profile = $this->profile_data->get_profile_id();
     $values['id'] = $profile['not_default'];
     $values['id_default'] = $profile['default'];
-
+    //getting the profile selection id sent from the form on home_view
     $profileselect = $this->input->post('profileselect', TRUE);
 
+    //if the profileselect variable is set to a value (chosen from the retreived id values above) go ahead and set that value as a default.
     if ($profileselect)
     {
       $profile = $this->profile_data->set_profile_id($profileselect);
-      //$values['id'] = $profile['not_default'];
-      //$values['id_default'] = $profile['default'];
       header('Location: /home');
     }
-
     //rendering views
     $this->load->view('header_view');
     $this->load->view('home_view', $values);
     $this->load->view('footer_view');
   }
+  //default method used to load and prepare the data that is being sent to data_view and then picked up by ajax and used to draw the charts
   public function data()
   {
     $startDate = $this->input->get('time_from', TRUE); //getting date for SQL query, and sanitizing it.
@@ -48,7 +47,6 @@ class Home extends CI_Controller {
 
     if ($startDate && $endDate)
     {
-
       $data['values'] = $this->get_data->load_ajax_data($startDate, $endDate);
       $final_data['temperature'] = $data["values"]["temperature"];
       $final_data['light'] = $data["values"]["light"];
@@ -62,6 +60,7 @@ class Home extends CI_Controller {
       header("HTTP/1.1 406 Not Acceptable");
     }
   }
+  //method to pass the new sensor data into the appropriate model.
   public function add()
   {
     $id = $this->input->get('id', TRUE); //getting temperature for SQL query, and sanitizing it.
@@ -74,7 +73,7 @@ class Home extends CI_Controller {
       $this->get_data->add_data($id, $temperature, $light, $moist, $phvalue);
     }
     else {
-      //else
+      //something is missing/not set
       header("HTTP/1.1 406 Not Acceptable");
     }
   }
