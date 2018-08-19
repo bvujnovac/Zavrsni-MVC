@@ -30,7 +30,7 @@
                 <li><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
                 <li> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
                 <li class="active"><a href="<?php echo base_url(); ?>obavijesti">Obavijesti</a></li>
-                <li><a href="<?php echo base_url(); ?>logout">Odjava</a></li>
+                <li><a href="<?php echo base_url(); ?>odjava">Odjava</a></li>
             </ul>
         </div>
     </div>
@@ -128,31 +128,13 @@
                 <div class="col-sm-12">
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
-                        <h4>Postojeći profili</h4>
+                        <h4>Obavijesti</h4>
                         <?php echo $tables; ?>
                         <p><span> </span></p>
                         </div>
                     </div>
                 </div>
-                <div class="col-sm-12">
-                    <div class="well"  id="sessions">
-                      <h4>Obriši postojeći profil.</h4>
-                      <form action="/profili" method="POST">
-                          <select class="form-control" name="profiledelete" id="profiledelete">
-                              <?php if(isset($id) && isset($id_default)){
-                                $nmbrof = count($id);
-                                echo '<option' . " " . 'value=' . "$id_default[0]" . '>' . $id_default[0] . '</option>';
-                                for ($i=0; $i < $nmbrof; $i++) {
-                                  echo '<option' . " " . 'value=' . "$id[$i]" . '>' . $id[$i] . '</option>';
-                                }
-                              } ?>
-                          </select>
-                          <button type="submit" class="btn btn-primary">Obriši</button>
-                      </form>
-                </div>
             </div>
-            </div>
-
             </div>
         </div>
     </div>

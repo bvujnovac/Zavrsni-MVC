@@ -16,9 +16,11 @@ class Profili extends CI_Controller {
         $this->load->model('profile_data');
         $this->load->helper('url');
         $this->load->library('table');
+        $this->load->library('session');
     }
     public function index()
     {
+        $is_logged_in = $this->session->is_logged_in;
         //getting max time stamp value to maintain the profile view look simillar to the home view
         $data = $this->get_data->load_data();
         $values['max'] = $data['max'];
@@ -69,7 +71,12 @@ class Profili extends CI_Controller {
           header('Location: /profili');
         }
         $this->load->view('header_view');
+        if ($is_logged_in) {
         $this->load->view('profile_view', $values);
+        }
+        else {
+          header('Location: /home');
+        }
         $this->load->view('footer_view');
     }
     //method to add the new profile

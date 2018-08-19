@@ -30,7 +30,7 @@
                 <li><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
                 <li class="active"> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
                 <li><a href="<?php echo base_url(); ?>obavijesti">Obavijesti</a></li>
-                <li><a href="<?php echo base_url(); ?>logout">Odjava</a></li>
+                <li><a href="<?php echo base_url(); ?>odjava">Odjava</a></li>
             </ul>
         </div>
     </div>

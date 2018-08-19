@@ -10,10 +10,12 @@ class Obavijesti extends CI_Controller {
         $this->load->model('profile_data');
         $this->load->helper('url');
         $this->load->library('table');
+        $this->load->library('session');
     }
 
     public function index()
     {
+        $is_logged_in = $this->session->is_logged_in;
         $data['sensors'] = $this->get_data->load_data();
         $values['max'] = $data['sensors']['max'];
         $profiles = $this->profile_data->existing_profiles();
@@ -61,7 +63,12 @@ class Obavijesti extends CI_Controller {
         }
 
         $this->load->view('header_view');
+        if ($is_logged_in) {
         $this->load->view('obavijesti_view', $values);
+        }
+        else {
+          header('Location: /home');
+        }
         $this->load->view('footer_view');
     }
 

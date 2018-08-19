@@ -9,9 +9,18 @@ class Home extends CI_Controller {
     $this->load->model('get_data');
     $this->load->model('profile_data');
     $this->load->helper('url');
+    $this->load->library('session');
   }
   public function index()
   {
+    //logging in the user if authenticated.
+    $username = strtolower($this->input->post('username', TRUE));
+    $password = strtolower($this->input->post('password', TRUE));
+    if ($username == 'student' && $password == 'zavrsnirad') {
+      $this->session->set_userdata('is_logged_in', TRUE);
+      header('Location: /home');
+    }
+    $is_logged_in = $this->session->is_logged_in;
     //getting min/max timestamp and last sensor values data from the model
     $data['sensors'] = $this->get_data->load_data();
     $values['min'] = $data['sensors']['min'];
@@ -36,7 +45,12 @@ class Home extends CI_Controller {
     }
     //rendering views
     $this->load->view('header_view');
-    $this->load->view('home_view', $values);
+    if ($is_logged_in) {
+      $this->load->view('home_view', $values);
+    }
+    else {
+      $this->load->view('login_view');
+    }
     $this->load->view('footer_view');
   }
   //default method used to load and prepare the data that is being sent to data_view and then picked up by ajax and used to draw the charts
