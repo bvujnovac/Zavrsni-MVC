@@ -149,6 +149,9 @@
                           </select>
                           <button type="submit" class="btn btn-primary">Obriši</button>
                       </form>
+                      <?php if(isset($notify)){
+                        echo '<p><span>' . $notify . '</span></p>';
+                      } ?>
                 </div>
             </div>
             </div>

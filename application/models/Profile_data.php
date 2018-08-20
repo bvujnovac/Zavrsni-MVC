@@ -101,7 +101,7 @@ class Profile_data extends CI_Model {
         $query_set = $this->db->update('profiles', $data_set);
       }
     }
-    //deleting the provided profile id abd it's data table.
+    //deleting the provided profile id and it's data table.
     public function delete_profile_id($profiledelete)
     {
       $this->db->where('id', $profiledelete);

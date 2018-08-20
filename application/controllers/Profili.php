@@ -64,11 +64,14 @@ class Profili extends CI_Controller {
         $values['id_default'] = $profile['default'];
         //if there is input from the profiledelete form, get it and sanatize it
         $profiledelete = $this->input->post('profiledelete', TRUE);
-        if ($profiledelete) //if profiledelete is set
+        if ($profiledelete && $profiledelete != $values['id_default'][0]) //if profiledelete is set
         {
           //delete the profile and it's table and return to the profile_view
           $this->profile_data->delete_profile_id($profiledelete);
           header('Location: /profili');
+        }
+        elseif ($profiledelete && $profiledelete == $values['id_default'][0]) {
+          $values['notify'] = "Ne možeš obrisati trenutno zadani profil!";
         }
         $this->load->view('header_view');
         if ($is_logged_in) {
