@@ -177,10 +177,27 @@ class Get_data extends CI_Model {
     $moist = $moist;
     $phvalue = $phvalue;
 
+    if ($temperature == -1) {
+      $temperature = 0;
+    }
+    if ($light == -1) {
+      $light = 0;
+    }
+    if ($moist == -1) {
+      $moist = 0;
+    }
+    if ($phvalue == -1) {
+      $phvalue = 0;
+    }
+
     if ($this->db->table_exists($id)) //if table with given id exists proceed with adding the data.
     {
       $addData = array('temperature' => $temperature,'light' => $light,'moist' => $moist,'phvalue' => $phvalue);
       $this->db->insert($id, $addData);
+    }
+    else {
+      //something is missing/not set
+      header("HTTP/1.1 406 Not Acceptable");
     }
   }
 }

@@ -129,6 +129,11 @@
                                 var max_datefinal = max_datetoshow.format("yyyy-mm-dd");
                                 var from_date = min_datefinal;
                                 var to_date = max_datefinal;
+                                function foo() {
+                                  getDataTemerature();
+                                  setTimeout(foo, 10000);
+                                }
+                                //foo();
                             </script>
                         </div>
                     </div>
@@ -297,14 +302,14 @@
                             "colorrange": {
                               "color": [
                                 {
-                                  "minvalue": "2",
-                                  "maxvalue": "3",
+                                  "minvalue": "4",
+                                  "maxvalue": "5",
                                   "label": "nagrizajuće kiselo",
                                   "code": "#e44a00"
                                 },
                                 {
-                                  "minvalue": "4",
-                                  "maxvalue": "5",
+                                  "minvalue": "5",
+                                  "maxvalue": "6",
                                   "label": "kiselo",
                                   "code": "#f8bd19"
                                 },

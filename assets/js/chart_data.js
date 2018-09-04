@@ -38,7 +38,7 @@ setTimeout(
 
 function getDataTemerature () {
     $.ajax({
-        url: 'https://zavrsniradferit.tk/home/data',
+        url: 'http://zavrsniradferit.tk/home/data',
         type: 'GET',
         data: "time_from=" + from_date + "&time_to=" + to_date,
         success : function(data) {
