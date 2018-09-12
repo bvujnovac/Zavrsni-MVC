@@ -82,6 +82,20 @@
 
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
+                  <h5>Odabir profila za prikaz</h5>
+                  <form action="/obavijesti" method="POST">
+                      <select class="form-control" name="profileselect" id="profileselect" onchange="this.form.submit()">
+                          <?php if(isset($id) && isset($id_default)){
+                            $nmbrof = count($id);
+                            echo '<option' . " " . 'value=' . "$id_default[0]" . '>' . $id_default[0] . '</option>';
+                            for ($i=0; $i < $nmbrof; $i++) {
+                              echo '<option' . " " . 'value=' . "$id[$i]" . '>' . $id[$i] . '</option>';
+                            }
+                          } ?>
+                      </select>
+                  </form>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-6 col-lg-8">
                     <div class="row">
                         <div class='col-sm-12 form-inline datetimepickerwrapper'>
                             <div class="form-group">
@@ -128,8 +142,15 @@
                 <div class="col-sm-12">
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
-                        <h4>Ocjena i obavijesti</h4>
+                        <h4>Profil biljke</h4>
                         <?php echo $tables; ?>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="well"  id="sessions">
+                      <div class="table-responsive">
+                        <h4>Ocjena</h4>
                         <div class="alert alert-success alert-dismissable">
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -146,6 +167,14 @@
                                 <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="well"  id="sessions">
+                      <div class="table-responsive">
+                        <h4>Obavijesti</h4>
+                        <?php echo $tables; ?>
                         </div>
                     </div>
                 </div>

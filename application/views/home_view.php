@@ -85,7 +85,6 @@
                   <h5>Odabir profila za prikaz</h5>
                   <form action="/home" method="POST">
                       <select class="form-control" name="profileselect" id="profileselect" onchange="this.form.submit()">
-                          <!--<option value="mrkva">mrkva</option>-->
                           <?php if(isset($id) && isset($id_default)){
                             $nmbrof = count($id);
                             echo '<option' . " " . 'value=' . "$id_default[0]" . '>' . $id_default[0] . '</option>';

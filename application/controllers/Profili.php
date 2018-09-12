@@ -54,7 +54,7 @@ class Profili extends CI_Controller {
           'table_close'           => '</table>'
         );
         //setting the heading and generating the data table
-        $values['tables'] = $this->table->set_heading('Profil', 'Temperaturni opt.', 'Temperaturni maks.', 'Osvjetljenje (h)', 'Vlaga', 'Ph min.', 'Ph maks.');
+        $values['tables'] = $this->table->set_heading('Profil', 'Temperaturni opt.', 'Temperaturni maks.', 'Osvjetljenje (h)', 'Vlaga', 'pH min.', 'pH maks.');
         $values['tables'] = $this->table->set_template($template);
         $values['tables'] = $this->table->generate($profiles);
         //this is here as a requirement for the drop-down menu to delete the profile which is not needed.
