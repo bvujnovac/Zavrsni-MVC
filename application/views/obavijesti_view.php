@@ -29,7 +29,7 @@
             <ul class="nav navbar-nav">
                 <li><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
                 <li> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
-                <li class="active"><a href="<?php echo base_url(); ?>obavijesti">Obavijesti</a></li>
+                <li class="active"><a href="<?php echo base_url(); ?>obavijesti">Ocjena i obavijesti</a></li>
                 <li><a href="<?php echo base_url(); ?>odjava">Odjava</a></li>
             </ul>
         </div>
@@ -61,7 +61,7 @@
                         <ul class="nav nav-pills nav-stacked">
                             <li><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
                             <li> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
-                            <li class="active"><a href="<?php echo base_url(); ?>obavijesti">Obavijesti</a></li>
+                            <li class="active"><a href="<?php echo base_url(); ?>obavijesti">Ocjena i obavijesti</a></li>
                             <li><a href="<?php echo base_url(); ?>odjava">Odjava</a></li>
                         </ul>
                     </div>
@@ -128,9 +128,24 @@
                 <div class="col-sm-12">
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
-                        <h4>Obavijesti</h4>
+                        <h4>Ocjena i obavijesti</h4>
                         <?php echo $tables; ?>
-                        <p><span> </span></p>
+                        <div class="alert alert-success alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            </div>
+                            <div class="alert alert-info alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            </div>
+                            <div class="alert alert-warning alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            </div>
+                            <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            </div>
                         </div>
                     </div>
                 </div>

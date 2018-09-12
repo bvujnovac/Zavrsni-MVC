@@ -17,6 +17,7 @@ class Profile_data extends CI_Model {
     {
       if ($this->db->table_exists('profiles'))
       {
+        $this->db->select('id, temperatureopt, temperaturemax, lighthours, moisture, phvaluemin, phvaluemax');
         $query = $this->db->get('profiles');
         return $query;
       }

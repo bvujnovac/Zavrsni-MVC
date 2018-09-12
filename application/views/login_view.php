@@ -56,8 +56,8 @@ div[style] {
                     alt="">
                 <div class="form-group">
                 <form method="post" class="form-signin">
-                <input type="text" name="username" class="form-control" placeholder="Username" required autofocus>
-                <input type="password" name="password" class="form-control" placeholder="Password" required>
+                <input type="text" name="username" class="form-control" placeholder="korisničko ime" required autofocus>
+                <input type="password" name="password" class="form-control" placeholder="lozinka" required>
                 <button class="btn btn-lg btn-primary btn-block" type="submit">Prijava</button>
                 </form>
                 </div>

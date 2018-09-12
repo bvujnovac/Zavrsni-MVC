@@ -47,7 +47,7 @@ class Obavijesti extends CI_Controller {
           'table_close'           => '</table>'
         );
 
-        $values['tables'] = $this->table->set_heading('Profil', 'Temperaturni opt.', 'Temperaturni maks.', 'Osvjetljenje (h)', 'Vlaga', 'Ph min.', 'Ph maks.', 'Zadani profil');
+        $values['tables'] = $this->table->set_heading('Profil', 'Temperaturni opt.', 'Temperaturni maks.', 'Osvjetljenje (h)', 'Vlaga', 'Ph min.', 'Ph maks.');
         $values['tables'] = $this->table->set_template($template);
         $values['tables'] = $this->table->generate($profiles);
 
