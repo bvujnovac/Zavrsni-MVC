@@ -39,7 +39,7 @@ class Profile_data extends CI_Model {
         $addtoTable = array('id' => $id, 'temperatureopt' => $temperatureopt,'temperaturemax' => $temperaturemax,'lighthours' => $lighthours,'moisture' => $moisture,'phvaluemin' => $phvaluemin,'phvaluemax' => $phvaluemax);
         $this->db->insert('profiles', $addtoTable);
 
-        $sql = "CREATE TABLE `bvujnova_zavrsni`.`{$id}` ( `timeStamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `temperature` FLOAT NULL DEFAULT NULL , `light` INT NULL DEFAULT NULL , `moist` INT NULL DEFAULT NULL , `phvalue` INT NULL DEFAULT NULL , PRIMARY KEY (`timeStamp`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
+        $sql = "CREATE TABLE `bvujnova_zavrsni`.`{$id}` ( `timeStamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `temperature` FLOAT NULL DEFAULT NULL , `light` INT NULL DEFAULT NULL , `moist` INT NULL DEFAULT NULL , `phvalue` INT NULL DEFAULT NULL , `is_okay_temp` TINYINT NOT NULL, `is_okay_light` TINYINT NOT NULL, `is_okay_moist` TINYINT NOT NULL, `is_okay_phvalue` TINYINT NOT NULL, PRIMARY KEY (`timeStamp`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
         //custom sql to create the new profile id separate table.
         $this->db->query($sql);
       }

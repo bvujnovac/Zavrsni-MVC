@@ -29,7 +29,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
                 <li> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
-                <li><a href="<?php echo base_url(); ?>obavijesti">Ocjena i obavijesti</a></li>
+                <li><a href="<?php echo base_url(); ?>obavijesti">Ocjena uvjeta</a></li>
                 <li><a href="<?php echo base_url(); ?>odjava">Odjava</a></li>
             </ul>
         </div>
@@ -61,7 +61,7 @@
                         <ul class="nav nav-pills nav-stacked">
                             <li class="active"><a href="<?php echo base_url(); ?>home">Kontrolna ploča</a></li>
                             <li> <a href="<?php echo base_url(); ?>profili">Profili</a> </li>
-                            <li><a href="<?php echo base_url(); ?>obavijesti">Ocjena i obavijesti</a></li>
+                            <li><a href="<?php echo base_url(); ?>obavijesti">Ocjena uvjeta</a></li>
                             <li><a href="<?php echo base_url(); ?>odjava">Odjava</a></li>
                         </ul>
                     </div>
