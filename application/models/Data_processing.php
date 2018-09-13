@@ -18,6 +18,20 @@ class Data_processing extends CI_Model {
         return $query;
       }
     }
+    public function last_profile_value()
+    {
+      $query_getdefault = $this->db->select('id');
+      $query_getdefault = $this->db->where('is_default', '1');
+      $query_getdefault = $this->db->get('profiles');
+      $row = $query_getdefault->row();
+      $default_id = $row->id;
+      if ($this->db->table_exists($default_id))
+      {
+        $sql = "SELECT DATE_FORMAT(`timeStamp`, '%Y-%m-%d-%H:%i:%S') AS `timeMax`, `temperature`, `light`, `moist`, `phvalue` FROM `{$default_id}` WHERE timeStamp=(select max(timeStamp) from `{$default_id}`);";
+        $query = $this->db->query($sql);
+        return $query;
+      }
+    }
     public function check_data(){
 
     }

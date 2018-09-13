@@ -151,33 +151,29 @@
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
                         <h4>Ocjena uvjeta</h4>
-                        <div class="alert alert-success alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                        <div class="alert alert-danger">
+                                Temperatura okoliša nije zadovoljavajuća.
                             </div>
-                            <div class="alert alert-info alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            <div class="alert alert-success">
+                                Razina osvjetljenja je zadovoljavajuća.
                             </div>
-                            <div class="alert alert-warning alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            <div class="alert alert-success">
+                                Vlaga biljke je zadovoljavajuća.
                             </div>
-                            <div class="alert alert-danger alert-dismissable">
-                                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                            <div class="alert alert-success">
+                                pH vrijednost tla je zadovoljavajuća.
                             </div>
                         </div>
                     </div>
                 </div>
-                <!--<div class="col-sm-12">
+                <div class="col-sm-12">
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
-                        <h4>Obavijesti</h4>
-                        <?php //echo $tables; ?>
+                        <h4>Incidenti</h4>
+                        <?php echo $vrijednosti; ?>
                         </div>
                     </div>
-                </div>-->
+                </div>
             </div>
             </div>
         </div>

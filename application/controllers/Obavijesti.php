@@ -20,6 +20,7 @@ class Obavijesti extends CI_Controller {
         $data['sensors'] = $this->get_data->load_data();
         $values['max'] = $data['sensors']['max'];
         $profiles = $this->data_processing->existing_profiles();
+        $ids = $this->data_processing->last_profile_value();
 
         $template = array(
           'table_open'            => '<table class="table table-condensed">',
@@ -51,6 +52,10 @@ class Obavijesti extends CI_Controller {
         $values['tables'] = $this->table->set_heading('Profil', 'Temperaturni opt.', 'Temperaturni maks.', 'Osvjetljenje (h)', 'Vlaga', 'pH min.', 'pH maks.');
         $values['tables'] = $this->table->set_template($template);
         $values['tables'] = $this->table->generate($profiles);
+
+        $values['vrijednosti'] = $this->table->set_heading('Vrijeme', 'Temperatura', 'Osvjetljenje', 'Vlaga', 'pH vrijednost');
+        $values['vrijednosti'] = $this->table->set_template($template);
+        $values['vrijednosti'] = $this->table->generate($ids);
 
         $profile = $this->profile_data->get_profile_id();
         $values['id'] = $profile['not_default'];
