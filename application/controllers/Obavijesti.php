@@ -20,7 +20,8 @@ class Obavijesti extends CI_Controller {
         $data['sensors'] = $this->get_data->load_data();
         $values['max'] = $data['sensors']['max'];
         $profiles = $this->data_processing->existing_profiles();
-        $ids = $this->data_processing->last_profile_value();
+        //$ids = $this->data_processing->last_profile_value();
+        $ids = $this->data_processing->get_incidents();
 
         $template = array(
           'table_open'            => '<table class="table table-condensed">',
@@ -53,7 +54,7 @@ class Obavijesti extends CI_Controller {
         $values['tables'] = $this->table->set_template($template);
         $values['tables'] = $this->table->generate($profiles);
 
-        $values['vrijednosti'] = $this->table->set_heading('Vrijeme', 'Temperatura', 'Osvjetljenje', 'Vlaga', 'pH vrijednost');
+        $values['vrijednosti'] = $this->table->set_heading('Vrijeme', 'Temperatura', 'Vlaga', 'pH vrijednost');
         $values['vrijednosti'] = $this->table->set_template($template);
         $values['vrijednosti'] = $this->table->generate($ids);
 
@@ -69,13 +70,6 @@ class Obavijesti extends CI_Controller {
         {
           $profile = $this->profile_data->set_profile_id($profileselect);
           header('Location: /obavijesti');
-        }
-
-        $profiledelete = $this->input->post('profiledelete', TRUE);
-        if ($profiledelete)
-        {
-          $this->profile_data->delete_profile_id($profiledelete);
-          header('Location: /profili');
         }
 
         $this->load->view('header_view');

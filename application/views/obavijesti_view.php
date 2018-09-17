@@ -150,7 +150,7 @@
                 <div class="col-sm-12">
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
-                        <h4>Ocjena uvjeta</h4>
+                        <h4>Ocjena trenutnih uvjeta</h4>
                         <div class="alert alert-danger">
                                 Temperatura okoliša nije zadovoljavajuća.
                             </div>
@@ -163,6 +163,14 @@
                             <div class="alert alert-success">
                                 pH vrijednost tla je zadovoljavajuća.
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="well"  id="sessions">
+                      <div class="table-responsive">
+                        <h4>Količina osvjetljenja (h)</h4>
+                        <?php echo $vrijednosti; ?>
                         </div>
                     </div>
                 </div>
