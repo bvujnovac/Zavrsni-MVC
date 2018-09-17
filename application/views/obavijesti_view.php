@@ -151,18 +151,48 @@
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
                         <h4>Ocjena trenutnih uvjeta</h4>
-                        <div class="alert alert-danger">
-                                Temperatura okoliša nije zadovoljavajuća.
-                            </div>
-                            <div class="alert alert-success">
-                                Razina osvjetljenja je zadovoljavajuća.
-                            </div>
-                            <div class="alert alert-success">
-                                Vlaga biljke je zadovoljavajuća.
-                            </div>
-                            <div class="alert alert-success">
-                                pH vrijednost tla je zadovoljavajuća.
-                            </div>
+                        <?php
+                        if ($tempOk == 1) {
+                          echo '<div class="alert alert-success">
+                                  Temperatura okoliša je zadovoljavajuća.
+                              </div>';
+                        }
+                        else {
+                          echo '<div class="alert alert-danger">
+                                  Temperatura okoliša nije zadovoljavajuća.
+                              </div>';
+                        }
+                        if ($lightOk == 1) {
+                          echo '<div class="alert alert-success">
+                              Razina osvjetljenja je zadovoljavajuća.
+                          </div>';
+                        }
+                        else {
+                          echo '<div class="alert alert-warning">
+                              Razina osvjetljenja nije zadovoljavajuća.
+                          </div>';
+                        }
+                        if ($moistOk == 1) {
+                          echo '<div class="alert alert-success">
+                              Vlaga biljke je zadovoljavajuća.
+                          </div>';
+                        }
+                        else {
+                          echo '<div class="alert alert-danger">
+                              Vlaga biljke nije zadovoljavajuća.
+                          </div>';
+                        }
+                        if ($phvalueOk == 1) {
+                          echo '<div class="alert alert-success">
+                              pH vrijednost tla je zadovoljavajuća.
+                          </div>';
+                        }
+                        else {
+                          echo '<div class="alert alert-danger">
+                              pH vrijednost tla nije zadovoljavajuća.
+                          </div>';
+                        }
+                        ?>
                         </div>
                     </div>
                 </div>
@@ -170,7 +200,7 @@
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
                         <h4>Količina osvjetljenja (h)</h4>
-                        <?php echo $vrijednosti; ?>
+                        <?php //echo $vrijednosti; ?>
                         </div>
                     </div>
                 </div>
@@ -178,7 +208,7 @@
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
                         <h4>Incidenti</h4>
-                        <?php echo $vrijednosti; ?>
+                        <?php echo $incidenti; ?>
                         </div>
                     </div>
                 </div>

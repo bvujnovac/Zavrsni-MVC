@@ -22,6 +22,12 @@ class Obavijesti extends CI_Controller {
         $profiles = $this->data_processing->existing_profiles();
         //$ids = $this->data_processing->last_profile_value();
         $ids = $this->data_processing->get_incidents();
+        // show grade
+        $incidents = $this->data_processing->check_data();
+        $values['tempOk'] = $incidents['tempOk'];
+        $values['lightOk'] = $incidents['lightOk'];
+        $values['moistOk'] = $incidents['moistOk'];
+        $values['phvalueOk'] = $incidents['phvalueOk'];
 
         $template = array(
           'table_open'            => '<table class="table table-condensed">',
@@ -54,9 +60,9 @@ class Obavijesti extends CI_Controller {
         $values['tables'] = $this->table->set_template($template);
         $values['tables'] = $this->table->generate($profiles);
 
-        $values['vrijednosti'] = $this->table->set_heading('Vrijeme', 'Temperatura', 'Vlaga', 'pH vrijednost');
-        $values['vrijednosti'] = $this->table->set_template($template);
-        $values['vrijednosti'] = $this->table->generate($ids);
+        $values['incidenti'] = $this->table->set_heading('Vrijeme', 'Temperatura', 'Vlaga', 'pH vrijednost');
+        $values['incidenti'] = $this->table->set_template($template);
+        $values['incidenti'] = $this->table->generate($ids);
 
         $profile = $this->profile_data->get_profile_id();
         $values['id'] = $profile['not_default'];

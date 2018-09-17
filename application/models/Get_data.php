@@ -177,6 +177,46 @@ class Get_data extends CI_Model {
     $moist = $moist;
     $phvalue = $phvalue;
 
+    if($this->db->table_exists('profiles'))
+    {
+      $this->db->select('temperatureopt, temperaturemax, moisture, 	phvaluemin, phvaluemax');
+      $this->db->where('id', $id);
+      $query = $this->db->get('profiles');
+
+      foreach ($query->result() as $row)
+      {
+        $tempMin = $row->temperatureopt;
+        $tempMax = $row->temperaturemax;
+        $moistProfile = $row->moisture;
+        $phvaluMin = $row->phvaluemin;
+        $phvaluMax = $row->phvaluemax;
+      }
+      if ($temperature >= $tempMin && $temperature <= $tempMax) {
+      $is_okay_temp = 1;
+      }
+      else {
+      $is_okay_temp = 0;
+      }
+      if ($light >= 35) {
+      $is_okay_light = 1;
+      }
+      else {
+      $is_okay_light = 0;
+      }
+      if ($moist >= $moistProfile - 7 && $moist <= $moistProfile + 7) {
+      $is_okay_moist = 1;
+      }
+      else {
+      $is_okay_moist = 0;
+      }
+      if ($phvalue >= $phvaluMin && $phvalue <= $phvaluMax) {
+      $is_okay_phvalue = 1;
+      }
+      else {
+      $is_okay_phvalue = 0;
+      }
+    }
+
     if ($temperature == -1) {
       $temperature = 0;
     }
@@ -192,7 +232,7 @@ class Get_data extends CI_Model {
 
     if ($this->db->table_exists($id)) //if table with given id exists proceed with adding the data.
     {
-      $addData = array('temperature' => $temperature,'light' => $light,'moist' => $moist,'phvalue' => $phvalue);
+      $addData = array('temperature' => $temperature,'light' => $light,'moist' => $moist,'phvalue' => $phvalue,'is_okay_temp' => $is_okay_temp,'is_okay_light' => $is_okay_light,'is_okay_moist' => $is_okay_moist,'is_okay_phvalue' => $is_okay_phvalue);
       $this->db->insert($id, $addData);
     }
     else {

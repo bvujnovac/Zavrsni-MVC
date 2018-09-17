@@ -74,13 +74,13 @@ function getDataTemerature () {
                 "theme": "zune"
             };
             var chartPhvalueProperties = {
-                "caption": "Ph faktor",
+                "caption": "pH faktor",
                 "xAxisName": "Vrijeme",
-                "yAxisName": "Ph faktor",
+                "yAxisName": "pH faktor",
                 "rotatevalues": "0",
                 "lineThickness": "2",
                 "paletteColors" : "#c20671",
-                "plotToolText": "<div><b>$label, <br/>Ph faktor: $datavalue %</b></div>",
+                "plotToolText": "<div><b>$label, <br/>pH faktor: $datavalue </b></div>",
                 "theme": "zune"
             };
             apiTempChart = new FusionCharts({

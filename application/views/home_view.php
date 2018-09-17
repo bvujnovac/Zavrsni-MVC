@@ -303,13 +303,13 @@
                                 {
                                   "minvalue": "4",
                                   "maxvalue": "5",
-                                  "label": "nagrizajuće kiselo",
+                                  "label": "kiselo",
                                   "code": "#e44a00"
                                 },
                                 {
                                   "minvalue": "5",
                                   "maxvalue": "6",
-                                  "label": "kiselo",
+                                  "label": "blago kiselo",
                                   "code": "#f8bd19"
                                 },
                                 {
@@ -317,6 +317,12 @@
                                   "maxvalue": "7",
                                   "label": "neutralno",
                                   "code": "#6baa01"
+                                },
+                                {
+                                  "minvalue": "7",
+                                  "maxvalue": "8",
+                                  "label": "blago lužnato",
+                                  "code": "#EBF4FA"
                                 }
                               ]
                             },
