@@ -23,7 +23,7 @@ class Obavijesti extends CI_Controller {
         //$ids = $this->data_processing->last_profile_value();
         $ids = $this->data_processing->get_incidents();
         // show grade
-        $incidents = $this->data_processing->check_data();
+        $incidents = $this->data_processing->process_current_sensor_data();
         $values['tempOk'] = $incidents['tempOk'];
         $values['lightOk'] = $incidents['lightOk'];
         $values['moistOk'] = $incidents['moistOk'];

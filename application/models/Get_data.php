@@ -104,12 +104,21 @@ class Get_data extends CI_Model {
   }
 
   //preparing data for ajax reqeust
-  public function load_ajax_data($start, $end)
+  public function load_ajax_data($start, $end, $limit)
   {
 
     //data passed from home controller
     $startDate = $start; //date requestd on home view
     $endDate = $end; //date requestd on home view
+    $limit = $limit;
+    //$limite = 1000;
+
+    if ($limit == 1) {
+    $limite = 12;
+    }
+    else {
+      $limite = 1000;
+    }
 
     //grabbing the default profile id from 'profiles' table
     $query_getdefault = $this->db->select('id');
@@ -119,7 +128,8 @@ class Get_data extends CI_Model {
     $default_id = $row->id;
 
     //custom sql query to get the specific values from default set profile corresponding table
-    $sql = "SELECT `timeStamp` AS `time`, `temperature`, `light`, `moist`, `phvalue` FROM `{$default_id}` WHERE `timeStamp` BETWEEN '{$startDate}' AND '{$endDate}' ORDER BY `timeStamp` ASC";
+    //$sql = "SELECT `timeStamp` AS `time`, `temperature`, `light`, `moist`, `phvalue` FROM `{$default_id}` WHERE `timeStamp` BETWEEN '{$startDate}' AND '{$endDate}' ORDER BY `timeStamp` ASC";
+    $sql = "SELECT * FROM (SELECT `timeStamp` AS `time`, `temperature`, `light`, `moist`, `phvalue` FROM `{$default_id}` WHERE `timeStamp` BETWEEN '{$startDate}' AND '{$endDate}' ORDER BY `timeStamp` DESC LIMIT {$limite}) SUB ORDER BY `time` ASC";
 
     //preparring array's
     $jsonArrayTemperature = array();
@@ -128,7 +138,7 @@ class Get_data extends CI_Model {
     $jsonArrayPhvalue = array();
     $finalArray = array();
 
-    //grabbing data per aboce custom sql query
+    //grabbing data per above custom sql query
     $query = $this->db->query($sql);
 
     //sorting the grabbed data
@@ -197,7 +207,7 @@ class Get_data extends CI_Model {
       else {
       $is_okay_temp = 0;
       }
-      if ($light >= 35) {
+      if ($light >= 25) {
       $is_okay_light = 1;
       }
       else {

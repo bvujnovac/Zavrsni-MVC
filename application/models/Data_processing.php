@@ -57,7 +57,7 @@ class Data_processing extends CI_Model {
       }
     }
 
-    public function check_data()
+    public function process_current_sensor_data()
     {
       $is_okayArray = array();
 
@@ -72,7 +72,6 @@ class Data_processing extends CI_Model {
         $this->db->select('is_okay_temp, is_okay_light, is_okay_moist, is_okay_phvalue');
         $this->db->order_by('timeStamp', 'DESC');
         $this->db->limit(1);
-        //$this->db->select_max('timeStamp');
         $query = $this->db->get($default_id);
 
         foreach ($query->result() as $row)
@@ -89,10 +88,6 @@ class Data_processing extends CI_Model {
       $is_okayArray = array_push_assoc($is_okayArray,'phvalueOk', $phvalueOk);
 
       return $is_okayArray;
-    }
-    public function process_current_sensor_data()
-    {
-
     }
     public function light()
     {

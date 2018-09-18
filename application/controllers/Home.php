@@ -1,5 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+//require_once 'Mobile_Detect.php';
+//$detect = new Mobile_Detect;
 
 class Home extends CI_Controller {
 
@@ -34,6 +36,7 @@ class Home extends CI_Controller {
     $profile = $this->profile_data->get_profile_id();
     $values['id'] = $profile['not_default'];
     $values['id_default'] = $profile['default'];
+
     //getting the profile selection id sent from the form on home_view
     $profileselect = $this->input->post('profileselect', TRUE);
 
@@ -56,12 +59,19 @@ class Home extends CI_Controller {
   //default method used to load and prepare the data that is being sent to data_view and then picked up by ajax and used to draw the charts
   public function data()
   {
+    $detect = new Mobile_Detect;
+    if ( $detect->isMobile() ) {
+      $limit = 1;
+    }
+    else {
+      $limit = 0;
+    }
     $startDate = $this->input->get('time_from', TRUE); //getting date for SQL query, and sanitizing it.
     $endDate = $this->input->get('time_to', TRUE); //getting date for SQL query, and sanitizing it.
 
     if ($startDate && $endDate)
     {
-      $data['values'] = $this->get_data->load_ajax_data($startDate, $endDate);
+      $data['values'] = $this->get_data->load_ajax_data($startDate, $endDate ,$limit);
       $final_data['temperature'] = $data["values"]["temperature"];
       $final_data['light'] = $data["values"]["light"];
       $final_data['moist'] = $data["values"]["moist"];
