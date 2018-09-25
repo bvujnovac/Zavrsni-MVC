@@ -42,6 +42,14 @@ class Profile_data extends CI_Model {
         $sql = "CREATE TABLE `bvujnova_zavrsni`.`{$id}` ( `timeStamp` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP , `temperature` FLOAT NULL DEFAULT NULL , `light` INT NULL DEFAULT NULL , `moist` INT NULL DEFAULT NULL , `phvalue` INT NULL DEFAULT NULL , `is_okay_temp` TINYINT NOT NULL, `is_okay_light` TINYINT NOT NULL, `is_okay_moist` TINYINT NOT NULL, `is_okay_phvalue` TINYINT NOT NULL, PRIMARY KEY (`timeStamp`)) ENGINE = InnoDB CHARACTER SET utf8 COLLATE utf8_general_ci;";
         //custom sql to create the new profile id separate table.
         $this->db->query($sql);
+
+      }
+
+      if ($this->db->table_exists('lighthours')) {
+        $fields = array(
+          $id => array('type' => 'FLOAT')
+        );
+        $this->dbforge->add_column('lighthours', $fields);
       }
     }
     // getting the default/non-default profile id and passing it to the controller.
@@ -108,5 +116,9 @@ class Profile_data extends CI_Model {
       $this->db->where('id', $profiledelete);
       $this->db->delete('profiles');
       $this->dbforge->drop_table($profiledelete);
+
+      if ($this->db->table_exists('lighthours')) {
+        $this->dbforge->drop_column('lighthours', $profiledelete);
+      }
     }
 }

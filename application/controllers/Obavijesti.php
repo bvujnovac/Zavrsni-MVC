@@ -28,6 +28,13 @@ class Obavijesti extends CI_Controller {
         $values['lightOk'] = $incidents['lightOk'];
         $values['moistOk'] = $incidents['moistOk'];
         $values['phvalueOk'] = $incidents['phvalueOk'];
+        $values['phvalueOut'] = $incidents['phvalueOut'];
+        //light values
+        $lights = $this->data_processing->light();
+
+        $profile = $this->profile_data->get_profile_id();
+        $values['id'] = $profile['not_default'];
+        $values['id_default'] = $profile['default'];
 
         $template = array(
           'table_open'            => '<table class="table table-condensed">',
@@ -64,9 +71,12 @@ class Obavijesti extends CI_Controller {
         $values['incidenti'] = $this->table->set_template($template);
         $values['incidenti'] = $this->table->generate($ids);
 
-        $profile = $this->profile_data->get_profile_id();
-        $values['id'] = $profile['not_default'];
-        $values['id_default'] = $profile['default'];
+        $variable = $profile['default'][0];
+
+        $values['lights'] = $this->table->set_heading('Datum', "Broj sati za: "."$variable");
+        $values['lights'] = $this->table->set_template($template);
+        $values['lights'] = $this->table->generate($lights);
+
 
         //getting the profile selection id sent from the form on obavijesti_view
         $profileselect = $this->input->post('profileselect', TRUE);
@@ -86,6 +96,10 @@ class Obavijesti extends CI_Controller {
           header('Location: /home');
         }
         $this->load->view('footer_view');
+    }
+    public function domanual()
+    {
+      $this->data_processing->manual_light();
     }
 
 }

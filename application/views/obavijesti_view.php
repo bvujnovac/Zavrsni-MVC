@@ -182,9 +182,14 @@
                               Vlaga biljke nije zadovoljavajuća.
                           </div>';
                         }
-                        if ($phvalueOk == 1) {
+                        if ($phvalueOk == 1 && $phvalueOut != -1) {
                           echo '<div class="alert alert-success">
                               pH vrijednost tla je zadovoljavajuća.
+                          </div>';
+                        }
+                        elseif ($phvalueOut == -1 && $phvalueOk == 0) {
+                          echo '<div class="alert alert-warning">
+                              pH vrijednost tla je izvan mjernoj opsega. Preporuća se dodatna kontrola.
                           </div>';
                         }
                         else {
@@ -200,7 +205,7 @@
                     <div class="well"  id="sessions">
                       <div class="table-responsive">
                         <h4>Količina osvjetljenja (h)</h4>
-                        <?php //echo $vrijednosti; ?>
+                        <?php echo $lights; ?>
                         </div>
                     </div>
                 </div>

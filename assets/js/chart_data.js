@@ -51,6 +51,8 @@ function getDataTemerature () {
                 "lineThickness": "2",
                 "paletteColors" : "#ff0000",
                 "plotToolText": "<div><b>$label, <br/>Temperatura: $datavalue °C</b></div>",
+                "showLabels": "1",
+                "showValues": "0",
                 "theme": "zune"
             };
             var chartLightProperties = {
@@ -61,6 +63,7 @@ function getDataTemerature () {
                 "lineThickness": "2",
                 "paletteColors" : "#ffb90a",
                 "plotToolText": "<div><b>$label, <br/>Osvjetljenje: $datavalue %</b></div>",
+                "showValues": "0",
                 "theme": "zune"
             };
             var chartMoistProperties = {
@@ -71,6 +74,7 @@ function getDataTemerature () {
                 "lineThickness": "2",
                 "paletteColors" : "#0075C2",
                 "plotToolText": "<div><b>$label, <br/>Vlaga: $datavalue %</b></div>",
+                "showValues": "0",
                 "theme": "zune"
             };
             var chartPhvalueProperties = {
@@ -81,28 +85,43 @@ function getDataTemerature () {
                 "lineThickness": "2",
                 "paletteColors" : "#c20671",
                 "plotToolText": "<div><b>$label, <br/>pH faktor: $datavalue </b></div>",
+                "showValues": "0",
                 "theme": "zune"
             };
             apiTempChart = new FusionCharts({
-                type: 'line',
-                renderAt: 'temperature-chart-container',
-                width: '100%',
-                height: '250',
-                dataFormat: 'json',
-                dataSource: {
-                    "chart": chartTemperatureProperties,
-                    "data": temperature
-                }
+              type: 'line',
+              renderAt: 'temperature-chart-container',
+              width: '100%',
+              height: '250',
+              dataFormat: 'json',
+              dataSource: {
+                "chart": chartTemperatureProperties,
+                "data": temperature,
+                /*"trendlines": [
+                  {
+                    "line": [
+                      {
+                        "startvalue": "24",
+                        "endValue": "28",
+                        "color": "#1aaf5d",
+                        "displayvalue": "Prosječno{br}kretanje{br}temperature",
+                        "valueOnRight": "1",
+                        "thickness": "2"
+                      }
+                    ]
+                  }
+                ]*/
+              }
             });
             apiLightChart = new FusionCharts({
-                type: 'line',
-                renderAt: 'light-chart-container',
-                width: '100%',
-                height: '250',
-                dataFormat: 'json',
-                dataSource: {
-                    "chart": chartLightProperties,
-                    "data": light
+              type: 'line',
+              renderAt: 'light-chart-container',
+              width: '100%',
+              height: '250',
+              dataFormat: 'json',
+              dataSource: {
+                "chart": chartLightProperties,
+                "data": light
                 }
             });
             apiMoistChart = new FusionCharts({
